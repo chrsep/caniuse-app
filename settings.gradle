@@ -1,0 +1,2 @@
+rootProject.name='caniuse'
+include ':app'
