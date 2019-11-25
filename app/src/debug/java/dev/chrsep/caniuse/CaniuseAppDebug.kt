@@ -7,15 +7,17 @@ import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.flipper.plugins.navigation.NavigationFlipperPlugin
+import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.facebook.soloader.SoLoader
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import dev.chrsep.caniuse.dagger.DaggerAppComponentDebug
+import javax.inject.Inject
 
 class CaniuseAppDebug : CaniuseApp() {
 
-//    @Inject
-//    lateinit var networkFlipperPlugin: NetworkFlipperPlugin
+    @Inject
+    lateinit var networkFlipperPlugin: NetworkFlipperPlugin
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponentDebug.builder()
@@ -33,10 +35,8 @@ class CaniuseAppDebug : CaniuseApp() {
             client.addPlugin(DatabasesFlipperPlugin(this));
             client.addPlugin(CrashReporterPlugin.getInstance());
             client.addPlugin(NavigationFlipperPlugin.getInstance());
-//            client.addPlugin(networkFlipperPlugin);
+            client.addPlugin(networkFlipperPlugin);
             client.start();
         }
-
     }
-
 }

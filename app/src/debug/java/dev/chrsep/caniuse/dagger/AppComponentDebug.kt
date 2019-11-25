@@ -4,7 +4,8 @@ import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
-import dev.chrsep.caniuse.CaniuseApp
+import dagger.android.AndroidInjector
+import dev.chrsep.caniuse.CaniuseAppDebug
 import io.decapos.posix.dagger.ViewModelModule
 import javax.inject.Singleton
 
@@ -19,15 +20,15 @@ import javax.inject.Singleton
     ]
 )
 @Singleton
-interface AppComponentDebug : AppComponent {
+interface AppComponentDebug : AndroidInjector<CaniuseAppDebug> {
     @Component.Builder
     interface Builder {
         @BindsInstance
         fun application(app: Application): Builder
 
-        fun build(): AppComponent
+        fun build(): AppComponentDebug
     }
 
-    override fun inject(app: CaniuseApp)
+    override fun inject(app: CaniuseAppDebug)
 }
 
