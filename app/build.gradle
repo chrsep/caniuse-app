@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 29
@@ -14,18 +16,39 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Room specific config
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
+
+    }
+
+    sourceSets {
+        // Make room schema file available to tests
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
-    buildFeatures {
-        compose true
+    //TODO: Enable bag when issue #1 is fixed
+//    buildFeatures {
+//        compose true
+//    }
+    viewBinding {
+        enabled = true
     }
+
 
 // To inline the bytecode built with JVM target 1.8 into
 // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
@@ -42,6 +65,7 @@ android {
 }
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -52,4 +76,31 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    def room_version = "2.2.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+
+    def dagger_version = "2.23.2"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    def retrofit_version = "2.6.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+
+    def lifecycle_version = "2.2.0-rc02"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+    def nav_version = "2.2.0-rc02"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }
+
