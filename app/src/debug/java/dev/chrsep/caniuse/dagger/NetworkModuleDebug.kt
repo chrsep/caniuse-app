@@ -8,6 +8,7 @@ import dev.chrsep.caniuse.network.CaniuseService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 class NetworkModuleDebug() {
@@ -16,19 +17,18 @@ class NetworkModuleDebug() {
     fun provideCaniuseService(networkFlipperPlugin: NetworkFlipperPlugin): CaniuseService {
         val client = OkHttpClient.Builder()
             .addNetworkInterceptor(FlipperOkhttpInterceptor(networkFlipperPlugin))
-            .build();
+            .build()
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://raw.githubusercontent.com/Fyrd/caniuse/master/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
-            .build();
+            .build()
 
         return retrofit.create(CaniuseService::class.java)
     }
 
+    @Singleton
     @Provides
-    fun provideNetworkFlipperPlugin(): NetworkFlipperPlugin {
-        return NetworkFlipperPlugin()
-    }
+    fun provideNetworkFlipperPlugin() = NetworkFlipperPlugin()
 }

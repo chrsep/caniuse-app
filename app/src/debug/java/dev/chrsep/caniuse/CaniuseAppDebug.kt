@@ -8,6 +8,7 @@ import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.flipper.plugins.navigation.NavigationFlipperPlugin
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
+import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin
 import com.facebook.soloader.SoLoader
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -27,16 +28,21 @@ class CaniuseAppDebug : CaniuseApp() {
 
     override fun onCreate() {
         super.onCreate()
-        SoLoader.init(this, false);
+        SoLoader.init(this, false)
 
         if (FlipperUtils.shouldEnableFlipper(this)) {
-            val client = AndroidFlipperClient.getInstance(this);
-            client.addPlugin(InspectorFlipperPlugin(this, DescriptorMapping.withDefaults()));
-            client.addPlugin(DatabasesFlipperPlugin(this));
-            client.addPlugin(CrashReporterPlugin.getInstance());
-            client.addPlugin(NavigationFlipperPlugin.getInstance());
-            client.addPlugin(networkFlipperPlugin);
-            client.start();
+            val client = AndroidFlipperClient.getInstance(this)
+            client.addPlugin(InspectorFlipperPlugin(this, DescriptorMapping.withDefaults()))
+            client.addPlugin(DatabasesFlipperPlugin(this))
+            client.addPlugin(CrashReporterPlugin.getInstance())
+            client.addPlugin(NavigationFlipperPlugin.getInstance())
+            client.addPlugin(networkFlipperPlugin)
+            client.addPlugin(
+                SharedPreferencesFlipperPlugin(
+                    this, "my_shared_preference_file"
+                )
+            )
+            client.start()
         }
     }
 }

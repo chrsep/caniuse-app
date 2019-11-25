@@ -27,6 +27,10 @@ class DashboardFragment : DaggerAppCompatDialogFragment() {
         viewModel.eras.observe(viewLifecycleOwner, Observer {
             binding.textView.text = it?.detail ?: "Empty"
         })
+
+        binding.fetchDataButton.setOnClickListener {
+            viewModel.refreshData()
+        }
         return binding.root
     }
 }

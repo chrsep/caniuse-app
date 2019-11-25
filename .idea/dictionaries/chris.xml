@@ -2,6 +2,7 @@
   <dictionary name="chris">
     <words>
       <w>caniuse</w>
+      <w>leakcanary</w>
     </words>
   </dictionary>
 </component>

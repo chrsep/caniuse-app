@@ -107,6 +107,8 @@ dependencies {
     debugImplementation "com.facebook.flipper:flipper:$flipper_version"
     debugImplementation 'com.facebook.soloader:soloader:0.8.0'
     debugImplementation "com.facebook.flipper:flipper-network-plugin:$flipper_version"
-    releaseImplementation "com.facebook.flipper:flipper-noop:$flipper_version"
+
+    def leakcanary_version = "2.0-beta-4"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
 }
 

@@ -10,7 +10,7 @@ import javax.inject.Inject
 class CaniuseRepository @Inject constructor(val service: CaniuseService, val eraDao: EraDao) {
     val getEras = eraDao.getAll()
 
-    suspend fun getData() = withContext(Dispatchers.IO) {
+    suspend fun refreshEra() = withContext(Dispatchers.IO) {
         val newData = service.getAllData()
         eraDao.insert(newData.eras.map {
             Era(it.key, it.value)
