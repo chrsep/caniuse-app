@@ -102,5 +102,11 @@ dependencies {
     def nav_version = "2.2.0-rc02"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    def flipper_version = "0.28.0"
+    debugImplementation "com.facebook.flipper:flipper:$flipper_version"
+    debugImplementation 'com.facebook.soloader:soloader:0.8.0'
+    debugImplementation "com.facebook.flipper:flipper-network-plugin:$flipper_version"
+    releaseImplementation "com.facebook.flipper:flipper-noop:$flipper_version"
 }
 

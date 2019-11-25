@@ -24,8 +24,8 @@ class DashboardFragment : DaggerAppCompatDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDasboardBinding.inflate(layoutInflater)
-        viewModel.data.observe(viewLifecycleOwner, Observer {
-            binding.textView.text = it.eras.toString()
+        viewModel.eras.observe(viewLifecycleOwner, Observer {
+            binding.textView.text = it?.detail ?: "Empty"
         })
         return binding.root
     }

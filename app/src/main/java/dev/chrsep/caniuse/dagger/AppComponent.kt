@@ -13,7 +13,16 @@ import dev.chrsep.caniuse.ui.dashboard.DashboardFragment
 import io.decapos.posix.dagger.ViewModelModule
 import javax.inject.Singleton
 
-@Component(modules = [AndroidInjectionModule::class, ActivityModule::class])
+@Component(
+    modules = [
+        AndroidInjectionModule::class,
+        ActivityModule::class,
+        DatabaseModule::class,
+        NetworkModule::class,
+        ViewModelModule::class,
+        FragmentModule::class
+    ]
+)
 @Singleton
 interface AppComponent : AndroidInjector<CaniuseApp> {
     @Component.Builder
@@ -30,14 +39,7 @@ interface AppComponent : AndroidInjector<CaniuseApp> {
 @Module
 abstract class ActivityModule {
 
-    @ContributesAndroidInjector(
-        modules = [
-            DatabaseModule::class,
-            NetworkModule::class,
-            ViewModelModule::class,
-            FragmentModule::class
-        ]
-    )
+    @ContributesAndroidInjector
     abstract fun contributeMainActivityInjector(): MainActivity
 }
 
