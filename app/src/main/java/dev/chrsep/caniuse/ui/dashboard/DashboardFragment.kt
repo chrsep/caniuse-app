@@ -25,7 +25,7 @@ class DashboardFragment : DaggerAppCompatDialogFragment() {
     ): View? {
         binding = FragmentDasboardBinding.inflate(layoutInflater)
         viewModel.data.observe(viewLifecycleOwner, Observer {
-            binding.textView.text = it.updated.toString()
+            binding.textView.text = it.eras.toString()
         })
         return binding.root
     }
