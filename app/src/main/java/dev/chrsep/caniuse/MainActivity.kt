@@ -2,13 +2,9 @@ package dev.chrsep.caniuse
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.Text
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
 import dagger.hilt.android.AndroidEntryPoint
+import dev.chrsep.caniuse.components.CaniuseRoot
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -17,16 +13,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MaterialTheme {
-                Greeting("Android")
-            }
+            CaniuseRoot()
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Card(backgroundColor = Color.White) {
-        Text(text = "Hello $name!")
-    }
-}
