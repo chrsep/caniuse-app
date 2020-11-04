@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface EraDao {
     @Query("SELECT * FROM era")
-    fun getAll(): Flow<Era>
+    fun getAll(): Flow<List<Era>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(eras: List<Era>): Void
