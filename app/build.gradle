@@ -82,20 +82,14 @@ dependencies {
 
     def compose_version = '1.0.0-alpha06'
     implementation "androidx.compose.ui:ui:$compose_version"
-    // Tooling support (Previews, etc.)
     implementation "androidx.ui:ui-tooling:$compose_version"
-    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation "androidx.compose.foundation:foundation:$compose_version"
-    // Material Design
     implementation "androidx.compose.material:material:$compose_version"
-    // Material design icons
     implementation "androidx.compose.material:material-icons-core:$compose_version"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
     // Integration with observables
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
-    implementation "androidx.compose.runtime:runtime-rxjava2:$compose_version"
-    // UI Tests
-    androidTestImplementation 'androidx.ui:ui-test:1.0.0-alpha06'
+    androidTestImplementation "androidx.ui:ui-test:$compose_version"
 
 
     def room_version = '2.3.0-alpha03'
@@ -107,6 +101,10 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    def hilt_lifecycle_version = '1.0.0-alpha02'
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_lifecycle_version"
+
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
@@ -115,11 +113,14 @@ dependencies {
 
     def lifecycle_version = '2.3.0-beta01'
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     def nav_version = '2.3.1'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    def nav_compose_version = "1.0.0-alpha01"
+    implementation "androidx.navigation:navigation-compose:$nav_compose_version"
 
     def leakcanary_version = "2.5"
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
