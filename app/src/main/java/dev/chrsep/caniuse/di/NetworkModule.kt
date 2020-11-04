@@ -1,12 +1,15 @@
-package dev.chrsep.caniuse.dagger
+package dev.chrsep.caniuse.di
 
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import dev.chrsep.caniuse.network.CaniuseService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class NetworkModule {
 
     @Provides

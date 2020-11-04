@@ -1,38 +1,32 @@
 package dev.chrsep.caniuse
 
 import android.os.Bundle
-import dagger.android.support.DaggerAppCompatActivity
-import dev.chrsep.caniuse.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.compose.foundation.Text
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : DaggerAppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-//        setContent {
-//            MaterialTheme {
-//                Greeting("Android")
-//            }
-//        }
+        setContent {
+            MaterialTheme {
+                Greeting("Android")
+            }
+        }
     }
 }
 
-//@Composable
-//fun Greeting(name: String) {
-//    Card(color = Color.White) {
-//        Padding(padding = Dp(16f)) {
-//            Text(text = "Hello $name!")
-//        }
-//    }
-//}
-//
-//@Preview
-//@Composable
-//fun DefaultPreview() {
-//    MaterialTheme {
-//        Greeting("Android")
-//    }
-//}
+@Composable
+fun Greeting(name: String) {
+    Card(backgroundColor = Color.White) {
+        Text(text = "Hello $name!")
+    }
+}
