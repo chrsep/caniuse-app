@@ -12,13 +12,15 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.ui.tooling.preview.Preview
+import dev.chrsep.caniuse.db.model.Feature
 import dev.chrsep.caniuse.repositories.CaniuseRepository
 import kotlinx.coroutines.launch
 
-class CaniuseRootViewModel @ViewModelInject constructor(val repo: CaniuseRepository) :
+class CaniuseRootViewModel @ViewModelInject constructor(private val repo: CaniuseRepository) :
     ViewModel() {
 
-    val eras = repo.getEras
+    val eras = repo.eras
+    val features = repo.features
 
     fun refreshData() = viewModelScope.launch {
         repo.refreshData()
@@ -28,17 +30,25 @@ class CaniuseRootViewModel @ViewModelInject constructor(val repo: CaniuseReposit
 @Composable
 fun CaniuseRoot() {
     val viewModel: CaniuseRootViewModel = viewModel()
-    val eras by viewModel.eras.collectAsState(listOf())
+    val features by viewModel.features.collectAsState(listOf())
 
     CaniuseTheme {
         Scaffold {
             Button(onClick = { viewModel.refreshData() }) {
                 Text(text = "Get Data")
             }
-            LazyColumnFor(items = eras) {
-                Text(text = it.detail)
+            FeaturesList(features = features)
+            LazyColumnFor(items = features) {
+                Text(text = it.title)
             }
         }
+    }
+}
+
+@Composable
+fun FeaturesList(features: List<Feature>) {
+    LazyColumnFor(items = features) {
+        Text(text = it.title)
     }
 }
 

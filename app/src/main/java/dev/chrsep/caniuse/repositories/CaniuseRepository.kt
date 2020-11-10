@@ -16,7 +16,8 @@ class CaniuseRepository @Inject constructor(
     private val eraDao: EraDao,
     private val featureDao: FeatureDao
 ) {
-    val getEras = eraDao.getAll()
+    val features = featureDao.getAll()
+    val eras = eraDao.getAll()
 
     suspend fun refreshData() = withContext(Dispatchers.IO) {
         val newData = service.getAllData()
