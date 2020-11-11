@@ -17,7 +17,7 @@ class NetworkModule {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://raw.githubusercontent.com/Fyrd/caniuse/master/")
             .addConverterFactory(GsonConverterFactory.create())
-            .build();
+            .build()
 
         return retrofit.create(CaniuseService::class.java)
     }
